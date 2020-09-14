@@ -33,5 +33,4 @@ class Descriptive_Table:
             data_dict['q3'].append(q3)
             data_dict['max'].append(maximum)
 
-        df = pd.DataFrame(data_dict)
-        return df
+        return data_dict
