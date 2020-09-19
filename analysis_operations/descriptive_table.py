@@ -1,11 +1,10 @@
 from typing import Dict
 from collections import defaultdict
 import numpy as np
-import pandas as pd
 
 
 class Descriptive_Table:
-    def __init__(self, vector_dict: Dict[str, np.array]):
+    def __init__(self, vector_dict: Dict[str, np.ndarray]):
         self.__vector_dict = vector_dict
 
     def get_descriptive_table(self):
@@ -25,12 +24,12 @@ class Descriptive_Table:
 
             data_dict['field'].append(field)
             data_dict['count'].append(count)
-            data_dict['mean'].append(avg)
-            data_dict['std'].append(std)
-            data_dict['min'].append(minimum)
+            data_dict['mean'].append(round(avg, 2))
+            data_dict['std'].append(round(std, 2))
+            data_dict['min'].append(round(minimum, 2))
             data_dict['q1'].append(q1)
-            data_dict['median'].append(median)
+            data_dict['median'].append(round(median, 2))
             data_dict['q3'].append(q3)
-            data_dict['max'].append(maximum)
+            data_dict['max'].append(round(maximum, 2))
 
         return data_dict
