@@ -8,14 +8,17 @@ def histogram(path: str,
               label: str,
               x_label: str,
               y_label: str,
+              bins: int or None = None,
+              x_ticks=None,
               add_mean_line: bool = False):
 
     plt.clf()
-    plt.hist(vector, label=label, color='royalblue')
+    plt.hist(vector, label=label, color='royalblue', bins=bins)
     plt.title(label=f'{label}_histogram')
     plt.xlabel(x_label)
     plt.ylabel(y_label)
-    plt.grid(True)
+    plt.xticks(ticks=x_ticks)
+    plt.grid(True, alpha=0.8)
 
     if add_mean_line:
         mean = vector.mean()

@@ -5,6 +5,7 @@ from typing import List
 def build_nd_array_from_object_list(object_list: List, field_name: str, remove_missing_values: bool = False):
 
     vector = [getattr(obj, field_name) for obj in object_list]
+    idx_to_remove = []
 
     if remove_missing_values:
         idx_to_remove = [idx for idx, value in enumerate(vector) if value is None]
@@ -18,5 +19,6 @@ def build_nd_array_from_object_list(object_list: List, field_name: str, remove_m
         vector = [float(value) for value in vector]
 
     vector = np.array(vector)
+    vector = vector.astype(float)
 
-    return vector
+    return vector, idx_to_remove
