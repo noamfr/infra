@@ -2,6 +2,8 @@ import numpy as np
 import os
 from matplotlib import pyplot as plt
 
+plt.style.use('seaborn-darkgrid')
+
 
 def histogram(path: str,
               vector: np.ndarray,
@@ -31,11 +33,12 @@ def histogram(path: str,
 
 def bar_chart(x, height, title: str, x_label: str, y_label: str, path: str):
     plt.clf()
-    plt.bar(x=x, height=height)
-    plt.title(title)
-    plt.xlabel(x_label)
-    plt.ylabel(y_label)
-    plt.xticks(rotation=45, ha='right', fontsize=8, weight='bold')
-    plt.grid(True)
+    plt.bar(x=x, height=height, color='royalblue')
+    plt.title(title, weight='bold')
+    plt.xlabel(x_label, weight='bold')
+    plt.ylabel(y_label, weight='bold')
+    plt.xticks(rotation=45, ha='right', fontsize=8)
+    plt.ylim(0, round(max(height) * 1.3, 1))
+    plt.grid(True, axis='y', linewidth=0.5, alpha=0.7)
     plt.tight_layout()
-    plt.savefig(os.path.join(path, f'{title}_bar_chart.png'))
+    plt.savefig(os.path.join(path, f'{title}_bar_chart.png'), dpi=500)
