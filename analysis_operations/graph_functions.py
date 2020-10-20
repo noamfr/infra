@@ -1,8 +1,9 @@
 import numpy as np
 import os
-from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt, use
 
 plt.style.use('seaborn-darkgrid')
+use('SVG')
 
 
 def histogram(path: str,
@@ -16,9 +17,9 @@ def histogram(path: str,
 
     plt.clf()
     plt.hist(vector, label=label, color='royalblue', bins=bins)
-    plt.title(label=f'{label}_histogram')
-    plt.xlabel(x_label)
-    plt.ylabel(y_label)
+    plt.title(label=f'{label}_histogram', weight='bold')
+    plt.xlabel(x_label, weight='bold')
+    plt.ylabel(y_label, weight='bold')
     plt.xticks(ticks=x_ticks)
     plt.grid(True, alpha=0.8)
 
@@ -28,7 +29,7 @@ def histogram(path: str,
 
     plt.legend(loc='best', shadow=True)
     plt.tight_layout()
-    plt.savefig(os.path.join(path, f'{label}_histogram.png'))
+    plt.savefig(os.path.join(path, f'{label}_histogram.png'), dpi=500)
 
 
 def bar_chart(x, height, title: str, x_label: str, y_label: str, path: str):
