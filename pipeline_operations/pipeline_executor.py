@@ -5,8 +5,8 @@ from .timer import Timer
 
 
 class Pipeline_Executor:
-    def __init__(self, pipeline_class, steps, save_history, save_state, pickle_path, job_key):
-        self.pipeline = pipeline_class
+    def __init__(self, pipeline_object, steps, save_history, save_state, pickle_path, job_key):
+        self.pipeline = pipeline_object
         self.steps = steps
         self.save_history: bool = save_history
         self.save_state: bool = save_state
