@@ -52,10 +52,16 @@ class Cross_Tab_Binary:
         v1_positive_v2_positive = self.get_cross_tab_count(v1_binary_value=1, v2_binary_value=1)
         v1_negative_v2_positive = self.get_cross_tab_count(v1_binary_value=0, v2_binary_value=1)
 
-        return v1_positive_v2_positive / (v1_positive_v2_positive + v1_negative_v2_positive)
+        if v1_positive_v2_positive == 0:
+            return 0
+        else:
+            return v1_positive_v2_positive / (v1_positive_v2_positive + v1_negative_v2_positive)
 
     def get_perc_v1_positive_from_all_v2_negatives(self):
         v1_positive_v2_negative = self.get_cross_tab_count(v1_binary_value=1, v2_binary_value=0)
         v1_negative_v2_negative = self.get_cross_tab_count(v1_binary_value=0, v2_binary_value=0)
 
-        return v1_positive_v2_negative / (v1_positive_v2_negative + v1_negative_v2_negative)
+        if v1_positive_v2_negative == 0:
+            return 0
+        else:
+            return v1_positive_v2_negative / (v1_positive_v2_negative + v1_negative_v2_negative)
