@@ -1,17 +1,19 @@
 import pickle
 import logging
+from typing import List
 from os import path
 from .timer import Timer
 
 
 class Pipeline_Executor:
-    def __init__(self, pipeline_object, steps, save_history, save_state, pickle_path, job_key):
-        self.pipeline = pipeline_object
+    def __init__(self, pipeline_class, steps: List, save_history: bool, save_state: bool, pickle_path: str,
+                 job_key: str):
+        self.pipeline = pipeline_class
         self.steps = steps
-        self.save_history: bool = save_history
-        self.save_state: bool = save_state
-        self.pickle_path: str = pickle_path
-        self.job_key: str = job_key
+        self.save_history = save_history
+        self.save_state = save_state
+        self.pickle_path = pickle_path
+        self.job_key = job_key
 
     def execute(self):
         self.__load_pipeline()
@@ -19,6 +21,7 @@ class Pipeline_Executor:
 
     def __run_steps(self):
         for step in self.steps:
+            step = step.__name__
             timer = Timer()
             logging.info("================ Executing: " + step + " ================")
             print("================ Executing: " + step + " ================")
