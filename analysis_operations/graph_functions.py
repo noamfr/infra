@@ -1,6 +1,9 @@
 import numpy as np
+import pandas as pd
 import os
+import seaborn as sns
 from matplotlib import pyplot as plt, use
+from typing import List
 
 plt.style.use('seaborn-darkgrid')
 use('SVG')
@@ -43,3 +46,21 @@ def bar_chart(x, height, title: str, x_label: str, y_label: str, path: str):
     plt.grid(True, axis='y', linewidth=0.5, alpha=0.7)
     plt.tight_layout()
     plt.savefig(os.path.join(path, f'{title}_bar_chart.png'), dpi=500)
+
+
+def correlation_matrix(
+        corr: pd.DataFrame,
+        labels: List[str],
+        title: str,
+        output_path: str,
+        square: bool = False):
+
+    use('tkagg')
+    plt.clf()
+    sns.heatmap(round(corr, 2), annot=True, vmin=-1, vmax=1, linewidth=0.5, cmap='RdBu',
+                square=square, xticklabels=labels, yticklabels=labels)
+    plt.xticks(fontsize=8, fontweight='bold', ha='right', rotation=45)
+    plt.yticks(fontsize=8, fontweight='bold', va="center")
+    plt.title(title, fontsize=10, fontweight='bold')
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_path, f'{title}.png'))
