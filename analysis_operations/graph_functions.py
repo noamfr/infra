@@ -64,3 +64,35 @@ def correlation_matrix(
     plt.title(title, fontsize=10, fontweight='bold')
     plt.tight_layout()
     plt.savefig(os.path.join(output_path, f'{title}.png'))
+
+
+def distribution_analysis(
+        output_path: str,
+        data: pd.DataFrame,
+        feature_name: str):
+
+    vec = data[feature_name]
+    mini = vec.min()
+    maxi = vec.max()
+    rng = maxi - mini
+    mean = vec.mean()
+    median = vec.median()
+    std = vec.std()
+    skew = vec.skew()
+    kurt = vec.kurtosis()
+    points = mean - std, mean + std
+
+    sns.distplot(vec, hist=True, kde=True)
+    sns.lineplot(points, [0, 0], color='black', label="std_dev")
+    sns.scatterplot([mini, maxi], [0, 0], color='orange', label="min/max")
+    sns.scatterplot([mean], [0], color='red', label="mean")
+    sns.scatterplot([median], [0], color='blue', label="median")
+
+    plt.xlabel(f'{feature_name}', fontsize=20)
+    plt.ylabel('density')
+    plt.title(f'std_dev = {round(std, 2)}; kurtosis = {round(kurt,2)};\nskew = {round(skew, 2)};range = {round(rng, 2)}\nmean = {round(mean, 2)}; median = {round(median, 2)}')
+    plt.savefig(os.path.join(output_path, f'{feature_name}_distribution.png'))
+
+
+
+
